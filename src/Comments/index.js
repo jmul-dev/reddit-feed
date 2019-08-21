@@ -77,28 +77,32 @@ class Comments extends React.Component {
 					userId: 1,
 					commentId: 1,
 					parentCommentId: 0,
-					comment: 'Test'
+					comment: 'Ayo mari kita belajar HTML',
+					timestamp: Math.floor(Date.now() / 1000) - 3600
 				},
 				{
 					userId: 2,
 					commentId: 2,
 					parentCommentId: 1,
-					comment: 'Test 2'
+					comment: 'Yuk lah',
+					timestamp: Math.floor(Date.now() / 1000) - 60
 				},
 				{
 					userId: 3,
 					commentId: 3,
 					parentCommentId: 2,
-					comment: 'Test 3'
+					comment: 'Lo dah sign up blm gan?',
+					timestamp: Math.floor(Date.now() / 1000) - 10
 				},
 				{
 					userId: 2,
 					commentId: 4,
 					parentCommentId: 0,
-					comment: 'Hello'
+					comment: 'Eh ayo mari gabung dengan kita!',
+					timestamp: Math.floor(Date.now() / 1000) - 2
 				}
 			],
-			sortBy: "commentId"
+			sortBy: "timestamp"
 		};
 		this.initialState = this.state;
 		this.sortBy = this.sortBy.bind(this);
@@ -115,7 +119,8 @@ class Comments extends React.Component {
 			userId: loggedInUserId,
 			commentId: comments.length+1,
 			parentCommentId: parentCommentId || 0,
-			comment
+			comment,
+			timestamp: Math.floor(Date.now() / 1000)
 		};
 		comments.push(_comment);
 		this.setState({ comments });
@@ -136,7 +141,7 @@ class Comments extends React.Component {
 					});
 				}
 			});
-			const _sortedComments = _.orderBy(_comments, ["commentId"], ["asc"]);
+			const _sortedComments = _.orderBy(_comments, ["timestamp"], ["asc"]);
 			_commentsHierarchy = buildCommentsHierarchy(_sortedComments);
 		}
 

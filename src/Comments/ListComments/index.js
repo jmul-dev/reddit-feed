@@ -12,8 +12,8 @@ class ListComments extends React.Component {
 
 		const _sortFields =
 			sortBy === "points"
-				? ["points", "commentId"]
-				: ["commentId", "points"];
+				? ["points", "timestamp"]
+				: ["timestamp", "points"];
 		const _sortedComments = _.orderBy(comments, _sortFields, ["desc", "desc"]);
 		const commentContent = _sortedComments.map((comment) => {
 			return (

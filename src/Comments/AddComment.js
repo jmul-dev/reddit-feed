@@ -18,19 +18,20 @@ class AddComment extends React.Component {
 	}
 
 	addComment() {
-		const { parentCommentId } = this.props;
+		const { parentCommentId, handleAddComment, toggleShowForm } = this.props;
 		const { comment } = this.state;
 
 		if (!comment) {
 			this.setState({ error: true, errorMessage: "Comment can not be empty" });
 			return;
 		}
-		this.props.handleAddComment(parentCommentId, comment);
+		handleAddComment(parentCommentId, comment);
 		this.setState({error: false, errorMessage: "", comment: ""});
+		toggleShowForm();
 	}
 
 	render() {
-		const { parentCommentId } = this.props;
+		const { parentCommentId, toggleShowForm } = this.props;
 		const { comment, error, errorMessage } = this.state;
 		return (
 			<Wrapper>
@@ -44,7 +45,7 @@ class AddComment extends React.Component {
 					Submit
 				</Button>
 				{parentCommentId > 0 && (
-					<Button className="no-bg margin-left" type="button" onClick={this.props.toggleShowForm}>
+					<Button className="no-bg margin-left" type="button" onClick={toggleShowForm}>
 						Cancel
 					</Button>
 				)}
