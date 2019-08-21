@@ -27,7 +27,9 @@ class AddComment extends React.Component {
 		}
 		handleAddComment(parentCommentId, comment);
 		this.setState({error: false, errorMessage: "", comment: ""});
-		toggleShowForm();
+		if (toggleShowForm) {
+			toggleShowForm();
+		}
 	}
 
 	render() {
