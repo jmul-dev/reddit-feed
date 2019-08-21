@@ -7,8 +7,7 @@ class AddComment extends React.Component {
 		this.state = {
 			comment: "",
 			error: false,
-			errorMessage: "",
-			formLoading: false
+			errorMessage: ""
 		};
 		this.handleTextareaChange = this.handleTextareaChange.bind(this);
 		this.addComment = this.addComment.bind(this);
@@ -23,15 +22,16 @@ class AddComment extends React.Component {
 		const { comment } = this.state;
 
 		if (!comment) {
-			this.setState({ error: true, errorMessage: "Comment can not be empty", formLoading: false });
+			this.setState({ error: true, errorMessage: "Comment can not be empty" });
 			return;
 		}
 		this.props.handleAddComment(parentCommentId, comment);
+		this.setState({error: false, errorMessage: "", comment: ""});
 	}
 
 	render() {
 		const { parentCommentId } = this.props;
-		const { comment, error, errorMessage, formLoading } = this.state;
+		const { comment, error, errorMessage } = this.state;
 		return (
 			<Wrapper>
 				<Textarea
@@ -40,11 +40,11 @@ class AddComment extends React.Component {
 					onChange={this.handleTextareaChange}
 					placeholder={`Yoooo what's up?`}
 				/>
-				<Button type="button" disabled={formLoading} onClick={this.addComment}>
-					{formLoading ? "Loading..." : "Submit"}
+				<Button type="button" onClick={this.addComment}>
+					Submit
 				</Button>
 				{parentCommentId > 0 && (
-					<Button className="no-bg margin-left" type="button" disabled={formLoading} onClick={this.props.toggleShowForm}>
+					<Button className="no-bg margin-left" type="button" onClick={this.props.toggleShowForm}>
 						Cancel
 					</Button>
 				)}
