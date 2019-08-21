@@ -63,8 +63,14 @@ class Comment extends React.Component {
 					id: 3,
 					name: 'Captain America',
 					points: 70
+				},
+				{
+					id: 4,
+					name: 'Nick Fury',
+					points: 150
 				}
 			],
+			loggedInUserId: 4,
 			comments: [
 				{
 					userId: 1,
@@ -95,10 +101,23 @@ class Comment extends React.Component {
 		};
 		this.initialState = this.state;
 		this.sortBy = this.sortBy.bind(this);
+		this.handleAddComment = this.handleAddComment.bind(this);
 	}
 
 	sortBy(key) {
 		this.setState({ sortBy: key });
+	}
+
+	handleAddComment(parentCommentId, comment) {
+		const { comments, loggedInUserId } = this.state;
+		const _comment = {
+			userId: loggedInUserId,
+			commentId: comments.length+1,
+			parentCommentId: parentCommentId || 0,
+			comment
+		};
+		comments.push(_comment);
+		this.setState({ comments });
 	}
 
 	render() {
@@ -125,7 +144,7 @@ class Comment extends React.Component {
 				<Wrapper className="margin-bottom-20">
 					<Title className="medium margin-top-20 margin-bottom-0">{course}</Title>
 				</Wrapper>
-				<AddComment />
+				<AddComment handleAddComment={this.handleAddComment} />
 				<Hr />
 				{_commentsHierarchy.length > 0 && (
 					<Wrapper>

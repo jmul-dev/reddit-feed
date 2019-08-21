@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Wrapper, MediumEditor, Button, Error } from "./styled";
+import { Wrapper, Textarea, Button, Error } from "./styled";
 
 class AddComment extends React.Component {
 	constructor(props) {
@@ -10,61 +10,37 @@ class AddComment extends React.Component {
 			errorMessage: "",
 			formLoading: false
 		};
-		this.handleEditorChange = this.handleEditorChange.bind(this);
+		this.handleTextareaChange = this.handleTextareaChange.bind(this);
+		this.addComment = this.addComment.bind(this);
 	}
 
-	handleEditorChange(comment) {
-		this.setState({ comment });
+	handleTextareaChange(event) {
+		this.setState({ comment: event.target.value });
 	}
 
-	/*
-	async addThought() {
-		const { taoId, nameId, parentThoughtId } = this.props;
-		const { thought } = this.state;
-		if (!taoId || !nameId) {
+	addComment() {
+		const { parentCommentId } = this.props;
+		const { comment } = this.state;
+
+		if (!comment) {
+			this.setState({ error: true, errorMessage: "Comment can not be empty", formLoading: false });
 			return;
 		}
-
-		this.setState({ formLoading: true });
-		if (!thought) {
-			this.setState({ error: true, errorMessage: "Thoughts can not be empty", formLoading: false });
-			return;
-		}
-		try {
-			const response = await graphqlInsertTAOThought(nameId, taoId, parentThoughtId || 0, thought);
-			if (!response.errors) {
-				this.setState({
-					error: false,
-					errorMessage: "",
-					formLoading: false,
-					thought: ""
-				});
-				this.props.getTAOThoughts();
-				//this.props.setSuccess("Success!", `Thought was added successfully`);
-				if (parentThoughtId) {
-					this.props.toggleShowForm();
-				}
-			} else {
-				this.setState({ error: true, errorMessage: response.errors[0].message, formLoading: false });
-			}
-		} catch (e) {
-			this.setState({ error: true, errorMessage: e.message, formLoading: false });
-		}
+		this.props.handleAddComment(parentCommentId, comment);
 	}
-	*/
 
 	render() {
 		const { parentCommentId } = this.props;
 		const { comment, error, errorMessage, formLoading } = this.state;
 		return (
 			<Wrapper>
-				<MediumEditor
+				<Textarea
+					value={comment}
 					className="margin-bottom-20"
-					text={comment}
-					onChange={this.handleEditorChange}
-					options={{ placeholder: { text: "Have any questions?" } }}
+					onChange={this.handleTextareaChange}
+					placeholder={`Yoooo what's up?`}
 				/>
-				<Button type="button" disabled={formLoading} onClick={() => this.props.addComment(comment)}>
+				<Button type="button" disabled={formLoading} onClick={this.addComment}>
 					{formLoading ? "Loading..." : "Submit"}
 				</Button>
 				{parentCommentId > 0 && (

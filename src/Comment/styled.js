@@ -1,6 +1,4 @@
 import styled from "styled-components";
-import Editor from "react-medium-editor";
-import "./medium-editor.css";
 
 export const Wrapper = styled.div`
 	font-size: 1em;
@@ -92,13 +90,14 @@ export const Hr = styled.hr`
 	background-color: rgba(255, 255, 255, 0.2);
 `;
 
-export const MediumEditor = styled(Editor)`
+export const Textarea = styled.textarea`
 	border: 1px solid rgba(0, 0, 0, 0.5);
 	border-radius: 4px;
 	color: #495057;
 	background-color: #ffffff;
 	padding: 10px;
 	min-height: 100px;
+	width: 100%;
 
 	&.margin-bottom-20 {
 		margin-bottom: 20px;
