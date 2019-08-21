@@ -127,7 +127,9 @@ class Comments extends React.Component {
 	}
 
 	render() {
-		const { course, users, comments, sortBy } = this.state;
+		const { course, users, comments, sortBy, loggedInUserId } = this.state;
+		const userInfo = users.find(user => user.id === loggedInUserId);
+
 		let _commentsHierarchy = [];
 		if (comments && comments.length) {
 			const _comments = [];
@@ -149,6 +151,7 @@ class Comments extends React.Component {
 			<Wrapper className="padding-40">
 				<Wrapper className="margin-bottom-20">
 					<Title className="medium margin-top-20 margin-bottom-0">{course}</Title>
+					Currently Logged-in as: <b>{userInfo.name}</b>
 				</Wrapper>
 				<AddComment handleAddComment={this.handleAddComment} />
 				<Hr />
