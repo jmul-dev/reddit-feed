@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import Editor from "react-medium-editor";
+import "./medium-editor.css";
 
 export const Wrapper = styled.div`
 	font-size: 1em;
@@ -86,15 +88,60 @@ export const Title = styled.div`
 	}
 `;
 
-export const Header = styled.div`
-	font-size: 0.875em;
-	margin: 10px 0;
+export const Hr = styled.hr`
+	background-color: rgba(255, 255, 255, 0.2);
+`;
 
-	&.strong {
-		font-weight: 800;
+export const MediumEditor = styled(Editor)`
+	border: 1px solid rgba(0, 0, 0, 0.5);
+	border-radius: 4px;
+	color: #495057;
+	background-color: #ffffff;
+	padding: 10px;
+	min-height: 100px;
+
+	&.margin-bottom-20 {
+		margin-bottom: 20px;
 	}
 `;
 
-export const Hr = styled.hr`
-	background-color: rgba(255, 255, 255, 0.2);
+export const Error = styled.div`
+	margin-top: 10px;
+	font-size: 0.875em;
+	font-weight: 500;
+	color: #ff0000;
+`;
+
+export const Button = styled.button`
+	background: rgba(0, 204, 71, 1);
+	color: #ffffff;
+	border: none;
+	padding: 8px 16px;
+	min-width: 88px;
+	font-size: 1em;
+	min-height: 36px;
+	line-height: 1.4em;
+	font-weight: 500;
+	cursor: pointer;
+
+	&.small {
+		padding: 5px 16px;
+		font-size: 0.8em;
+		min-height: auto;
+	}
+	&.orange {
+		background: #ffbe01;
+	}
+	&.red {
+		background: #d34343;
+	}
+	&.margin-left {
+		margin-left: 10px;
+	}
+	&.margin-right {
+		margin-right: 15px;
+	}
+	&.no-bg {
+		background: none;
+	}
 `;

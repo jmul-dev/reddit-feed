@@ -1,6 +1,7 @@
 import * as React from "react";
-import { Wrapper, Title, Header, Ahref, Hr } from "./styled";
+import { Wrapper, Title, Hr } from "./styled";
 import { DropdownButton, Dropdown } from "react-bootstrap";
+import { AddComment } from "./AddComment";
 import * as _ from "lodash";
 
 const buildCommentsHierarchy = (comments) => {
@@ -68,7 +69,7 @@ class Comment extends React.Component {
 				{
 					userId: 1,
 					commentId: 1,
-					parentCommentId: null,
+					parentCommentId: 0,
 					comment: 'Test'
 				},
 				{
@@ -86,7 +87,7 @@ class Comment extends React.Component {
 				{
 					userId: 2,
 					commentId: 4,
-					parentCommentId: null,
+					parentCommentId: 0,
 					comment: 'Hello'
 				}
 			],
@@ -124,6 +125,7 @@ class Comment extends React.Component {
 				<Wrapper className="margin-bottom-20">
 					<Title className="medium margin-top-20 margin-bottom-0">{course}</Title>
 				</Wrapper>
+				<AddComment />
 				<Hr />
 				{_commentsHierarchy.length > 0 && (
 					<Wrapper>

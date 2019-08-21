@@ -1,25 +1,23 @@
 import * as React from "react";
-import { Wrapper, MediumEditor, Button, Error } from "components/";
-import { ProgressLoaderContainer } from "widgets/ProgressLoader/";
-import { insertTAOThought as graphqlInsertTAOThought } from "utils/graphql";
+import { Wrapper, MediumEditor, Button, Error } from "./styled";
 
-class AddThought extends React.Component {
+class AddComment extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			thought: "",
+			comment: "",
 			error: false,
 			errorMessage: "",
 			formLoading: false
 		};
 		this.handleEditorChange = this.handleEditorChange.bind(this);
-		this.addThought = this.addThought.bind(this);
 	}
 
-	handleEditorChange(thought) {
-		this.setState({ thought });
+	handleEditorChange(comment) {
+		this.setState({ comment });
 	}
 
+	/*
 	async addThought() {
 		const { taoId, nameId, parentThoughtId } = this.props;
 		const { thought } = this.state;
@@ -53,25 +51,23 @@ class AddThought extends React.Component {
 			this.setState({ error: true, errorMessage: e.message, formLoading: false });
 		}
 	}
+	*/
 
 	render() {
-		const { taoId, parentThoughtId, pastEventsRetrieved } = this.props;
-		const { thought, error, errorMessage, formLoading } = this.state;
-		if (!taoId || !pastEventsRetrieved) {
-			return <ProgressLoaderContainer />;
-		}
+		const { parentCommentId } = this.props;
+		const { comment, error, errorMessage, formLoading } = this.state;
 		return (
 			<Wrapper>
 				<MediumEditor
 					className="margin-bottom-20"
-					text={thought}
+					text={comment}
 					onChange={this.handleEditorChange}
-					options={{ placeholder: { text: "What are your thoughts?" } }}
+					options={{ placeholder: { text: "Have any questions?" } }}
 				/>
-				<Button type="button" disabled={formLoading} onClick={this.addThought}>
-					{formLoading ? "Loading..." : "Think"}
+				<Button type="button" disabled={formLoading} onClick={() => this.props.addComment(comment)}>
+					{formLoading ? "Loading..." : "Submit"}
 				</Button>
-				{parentThoughtId > 0 && (
+				{parentCommentId > 0 && (
 					<Button className="no-bg margin-left" type="button" disabled={formLoading} onClick={this.props.toggleShowForm}>
 						Cancel
 					</Button>
@@ -82,4 +78,4 @@ class AddThought extends React.Component {
 	}
 }
 
-export { AddThought };
+export { AddComment };
