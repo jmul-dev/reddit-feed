@@ -140,7 +140,4 @@ export const Button = styled.button`
 	&.margin-right {
 		margin-right: 15px;
 	}
-	&.no-bg {
-		background: none;
-	}
 `;

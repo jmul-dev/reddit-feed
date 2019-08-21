@@ -159,7 +159,7 @@ class Comments extends React.Component {
 								</Dropdown.Item>
 							</DropdownButton>
 						</Wrapper>
-						<ListComments users={users} comments={_commentsHierarchy} sortBy={sortBy} />
+						<ListComments users={users} comments={_commentsHierarchy} sortBy={sortBy} handleAddComment={this.handleAddComment} />
 					</Wrapper>
 				)}
 			</Wrapper>

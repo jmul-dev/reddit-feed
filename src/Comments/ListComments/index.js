@@ -5,7 +5,7 @@ import * as _ from "lodash";
 
 class ListComments extends React.Component {
 	render() {
-		const { users, comments, sortBy } = this.props;
+		const { users, comments, sortBy, handleAddComment } = this.props;
 		if (!comments.length) {
 			return null;
 		}
@@ -18,14 +18,14 @@ class ListComments extends React.Component {
 		const commentContent = _sortedComments.map((comment) => {
 			return (
 				<Wrapper key={comment.commentId} className="margin-bottom-20">
-					<Comment users={users} commentInfo={comment} />
+					<Comment users={users} commentInfo={comment} handleAddComment={handleAddComment} />
 					{comment.children.length > 0 && (
 						<Wrapper className="padding-left-20">
 							<ListComments
 								users={users}
 								comments={comment.children}
 								sortBy={sortBy}
-								isChildren={true}
+								handleAddComment={handleAddComment}
 							/>
 						</Wrapper>
 					)}

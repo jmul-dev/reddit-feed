@@ -15,7 +15,7 @@ class Comment extends React.Component {
 	}
 
 	render() {
-		const { users, commentInfo } = this.props;
+		const { users, commentInfo, handleAddComment } = this.props;
 		const { showForm } = this.state;
 		if (!users || !commentInfo) {
 			return null;
@@ -40,6 +40,7 @@ class Comment extends React.Component {
 					<AddComment
 						parentCommentId={commentInfo.commentId}
 						toggleShowForm={this.toggleShowForm}
+						handleAddComment={handleAddComment}
 					/>
 				)}
 			</Wrapper>
