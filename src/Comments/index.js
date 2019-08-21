@@ -2,6 +2,7 @@ import * as React from "react";
 import { Wrapper, Title, Hr } from "./styled";
 import { DropdownButton, Dropdown } from "react-bootstrap";
 import { AddComment } from "./AddComment";
+import { ListComments } from "./ListComments/";
 import * as _ from "lodash";
 
 const buildCommentsHierarchy = (comments) => {
@@ -43,7 +44,7 @@ const buildCommentsHierarchy = (comments) => {
 	return treeData;
 };
 
-class Comment extends React.Component {
+class Comments extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -158,6 +159,7 @@ class Comment extends React.Component {
 								</Dropdown.Item>
 							</DropdownButton>
 						</Wrapper>
+						<ListComments users={users} comments={_commentsHierarchy} sortBy={sortBy} />
 					</Wrapper>
 				)}
 			</Wrapper>
@@ -165,4 +167,4 @@ class Comment extends React.Component {
 	}
 }
 
-export { Comment };
+export { Comments };
